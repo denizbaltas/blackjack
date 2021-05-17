@@ -9,8 +9,11 @@ class game:
             if balance == 0 : 
                 print("Your Balance Is 0 You Lost \n ")
                 break
-
-            bet = int(input(f"You Have {balance} balance\nHow Much Do You Want to Bet : "))
+                
+            try: 
+                bet = int(input(f"You Have {balance} balance\nHow Much Do You Want to Bet : "))
+            except ValueError :
+                continue
             
             if bet > balance : 
                 print(f"Your Max Bet is {balance}")
