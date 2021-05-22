@@ -9,7 +9,6 @@ class game:
             if balance == 0 : 
                 print("Your Balance Is 0 You Lost \n ")
                 break
-                
             try: 
                 bet = int(input(f"You Have {balance} balance\nHow Much Do You Want to Bet : "))
             except ValueError :
@@ -26,7 +25,6 @@ class game:
             userCards = []
             userCards.append(self.hit(cards))
             userCards.append(self.hit(cards))
-
             print(f"User Hand : {userCards} \nUser Hand Value : {self.cardvalues(userCards)}\n")
 
 
@@ -38,6 +36,7 @@ class game:
             while True : 
                 if self.cardvalues(userCards) == 21 and self.cardvalues(dealerCards) != 21 : 
                     print("You Won")
+                    balance += bet
                     break
                 elif self.cardvalues(userCards) == 21 and self.cardvalues(dealerCards) == 21 :
                     print("Tie")
@@ -94,6 +93,7 @@ class game:
         return card
 
     def cardvalues(self,handCards):
+        ilkA = True
         toplam = 0
         for x in handCards : 
             if x == "K" : 
@@ -103,15 +103,16 @@ class game:
             elif x == "J" : 
                 x = 10
             elif x == "A" : 
-                controlCards = handCards
+                controlCards = handCards.copy()
                 controlCards.remove("A")
 
-                if 10 >= self.cardvalues(controlCards) : 
+                if handCards[0] == x and ilkA == True: 
+                    x = 11
+                elif 10 >= self.cardvalues(controlCards) :
                     x = 11
                 elif 10 < self.cardvalues(controlCards) :
                     x = 1
-                
-            
+            ilkA = False
             toplam += x
         return toplam
 
