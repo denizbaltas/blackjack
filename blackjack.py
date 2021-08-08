@@ -1,4 +1,5 @@
 
+import time
 import random
 
 class game:
@@ -8,10 +9,15 @@ class game:
         while True : 
             if balance == 0 : 
                 print("Your Balance Is 0 You Lost \n ")
+                time.sleep(5)
                 break
             try: 
                 bet = int(input(f"You Have {balance} balance\nHow Much Do You Want to Bet : "))
+                if  bet < 0 : 
+                    print("Min Bet Value is 1.")
+                    continue
             except ValueError :
+                print("Bet Value Must Be An Integer.")
                 continue
             
             if bet > balance : 
@@ -25,8 +31,8 @@ class game:
             userCards = []
             userCards.append(self.hit(cards))
             userCards.append(self.hit(cards))
+            
             print(f"User Hand : {userCards} \nUser Hand Value : {self.cardvalues(userCards)}\n")
-
 
             dealerCards = []
             dealerCards.append(self.hit(cards))
@@ -129,7 +135,6 @@ class game:
         
         return toplam
 
-
     def cards(self):
         cards = []
         for x in range(24):
@@ -148,4 +153,6 @@ class game:
             cards.append("K")
             cards.append("A")
         return cards
-game()
+if __name__ =="__main__" :
+
+    game()
